@@ -16,13 +16,11 @@
 
 #pragma once
 
+#include <memory>
+#include <functional>
 #include "../common.h"
-
-struct Award
-{
-    uint16 Time;
-    uint16 Type;
-};
+#include "../localisation/StringIds.h"
+#include "../peep/Peep.h"
 
 enum PARK_AWARD
 {
@@ -46,9 +44,44 @@ enum PARK_AWARD
     PARK_AWARD_COUNT
 };
 
+struct AwardGrant
+{
+    uint16 Time;
+    uint16 Type;
+};
+
+class Award
+{
+public:
+    virtual ~Award() = default;
+    virtual bool positive() const = 0;
+    virtual bool deserved() const = 0;
+    virtual PARK_AWARD type() const = 0;
+    virtual rct_string_id string() const = 0;
+};
+
+class AwardManager
+{
+public:
+    AwardManager(
+        std::function<bool ()> park_is_open,
+        std::function<void (Award* award)> on_award_granted,
+        std::function<void ()> on_award_revoked
+    );
+
+    void update();
+    void reset();
+
+    std::vector<Award> current_awards() const;
+private:
+    std::function<void (Award* award)> on_award_granted_;
+    std::function<void ()> on_award_revoked_;
+    std::vector<Award*> awards_;
+};
+
 #define MAX_AWARDS 4
 
-extern Award gCurrentAwards[MAX_AWARDS];
+extern AwardGrant gCurrentAwards[MAX_AWARDS];
 
 bool award_is_positive(sint32 type);
 void award_reset();

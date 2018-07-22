@@ -1679,7 +1679,7 @@ static void window_park_awards_paint(rct_window *w, rct_drawpixelinfo *dpi)
     sint32 y = w->y + window_park_awards_widgets[WIDX_PAGE_BACKGROUND].top + 4;
     sint32 count = 0;
     for (sint32 i = 0; i < MAX_AWARDS; i++) {
-        Award *award = &gCurrentAwards[i];
+        AwardGrant *award = &gCurrentAwards[i];
         if (award->Time == 0)
             continue;
 

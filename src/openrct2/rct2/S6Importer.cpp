@@ -316,7 +316,7 @@ public:
         for (sint32 i = 0; i < RCT12_MAX_AWARDS; i++)
         {
             rct12_award * src = &_s6.awards[i];
-            Award *       dst = &gCurrentAwards[i];
+            AwardGrant *       dst = &gCurrentAwards[i];
             dst->Time         = src->time;
             dst->Type         = src->type;
         }

@@ -305,7 +305,7 @@ void S6Exporter::Export()
     // Awards
     for (sint32 i = 0; i < RCT12_MAX_AWARDS; i++)
     {
-        Award *       src = &gCurrentAwards[i];
+        AwardGrant *       src = &gCurrentAwards[i];
         rct12_award * dst = &_s6.awards[i];
         dst->time         = src->Time;
         dst->type         = src->Type;
