@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Award.h"
+#include "AwardManager.h"
 
 class UntidyAward final : public Award {
 public:
